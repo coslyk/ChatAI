@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+    
+<script>
+// AI的核心算法
+function most_powerful_AI_on_earth() {
+    // 获取问题内容
+    var question = document.getElementById("question").value;
+    
+    // 人类的本质是复读机
+    var answer = question;
+    
+    // 如果是疑问句，回答时把“你”“我”调换
+    if (!answer.endsWith("！") && !answer.endsWith("。")) {
+        answer = answer.replace("你", "temp1");
+        answer = answer.replace("我", "你");
+        answer = answer.replace("temp1", "我");
+    }
+    
+    // 把疑问句变成肯定句
+    var ends = new Array(/吗？$/, /吗$/, /不？$/, /不$/, /没有？$/, /没有$/, /没？$/, /没$/, /？$/);
+    for (var i in ends)
+        answer = answer.replace(ends[i], "！");
+        
+    // 疑问词换成“当然”
+    var words = new Array("到底", "为什么", "怎么", "为何");
+    for (var i in words)
+        answer = answer.replace(words[i], "当然");
+    
+    // 处理“你爱不爱我？“这种句式
+    var substr = answer.match(/.不./);
+    if (substr !== null)
+        answer = answer.replace(substr[0], substr[0].substr(2));
+    
+    // 感叹号也是很重要的
+    if (!answer.endsWith("！"))
+        answer = answer + "！";
+    
+    alert(answer);
+}
+
+// 回车事件
+function onKeyPress(e) {
+    var keyCode = null;
+    if(e.which)
+        keyCode = e.which;
+    else if(e.keyCode)
+        keyCode = e.keyCode;
+    
+    if(keyCode == 13) {
+        most_powerful_AI_on_earth();
+        return false;
+    }
+    return true;
+}
+</script>
+</head>
+<body>
+<h2>地表最强中文聊天AI v1.0</h2>
+请输入:<br>
+<input type="text" id="question" value="你好！" onkeypress="return onKeyPress(event)"/><br>
+<button type="button" onclick="most_powerful_AI_on_earth()">Click</button>
+</body>
+</html>
