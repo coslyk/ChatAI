@@ -22,22 +22,32 @@ function most_powerful_AI_on_earth() {
     
     // 把疑问句变成肯定句
     var ends = new Array(/吗？$/, /吗$/, /不？$/, /不$/, /没有？$/, /没有$/, /没？$/, /没$/, /？$/);
-    for (var i in ends)
+    for (var i in ends) {
         answer = answer.replace(ends[i], "！");
+    }
+    
+    // 处理“难道。。不”句式
+    if (answer.includes("难道") && answer.includes("不")) {
+        answer.replace("难道", "");
+        answer.replace("不", "当然");
+    }
         
     // 疑问词换成“当然”
     var words = new Array("到底", "为什么", "怎么", "为何");
-    for (var i in words)
+    for (var i in words) {
         answer = answer.replace(words[i], "当然");
+    }
     
     // 处理“你爱不爱我？“这种句式
     var substr = answer.match(/.不./);
-    if (substr !== null)
+    if (substr !== null) {
         answer = answer.replace(substr[0], substr[0].substr(2));
+    }
     
     // 感叹号也是很重要的
-    if (!answer.endsWith("！"))
+    if (!answer.endsWith("！")) {
         answer = answer + "！";
+    }
     
     alert(answer);
 }
